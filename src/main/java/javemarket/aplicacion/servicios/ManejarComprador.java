@@ -50,21 +50,25 @@ public class ManejarComprador implements RepositorioComprador {
         String sql = "SELECT * FROM compradores WHERE correo = ?";
         Comprador comprador = null;
 
-        try {
-            PreparedStatement stmt = conexionBase.getConnection().prepareStatement(sql);
-            stmt.setString(1, correo);
+        try (Connection connection = conexionBase.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-            ResultSet rs = stmt.executeQuery();
+            stmt.setString(1, correo.trim()); // Elimina espacios en blanco del correo
+            System.out.println("Query preparada: " + stmt); // Para depurar
 
-            if (rs.next()) {
-                comprador = new Comprador(
-                        rs.getString("nombre"),
-                        rs.getString("correo"),
-                        rs.getString("contrasena"),
-                        rs.getString("preferencias_emprendimiento")
-                );
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Datos encontrados para el correo: " + correo);
+                    comprador = new Comprador(
+                            rs.getString("nombre"),
+                            rs.getString("correo"),
+                            rs.getString("contrasena"),
+                            rs.getString("categoria_preferida") // Nombre de columna corregido
+                    );
+                } else {
+                    System.out.println("No se encontraron datos para el correo: " + correo);
+                }
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();

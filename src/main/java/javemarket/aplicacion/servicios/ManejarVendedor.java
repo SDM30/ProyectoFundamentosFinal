@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ManejarVendedor implements RepositorioVendedor {
 
-    private Connection connection;
+    private ConexionBase conexionBase;
 
     public ManejarVendedor() {
-        this.connection = new ConexionBase().getConnection();
+        this.conexionBase = new ConexionBase();
     }
 
     @Override
@@ -24,7 +24,8 @@ public class ManejarVendedor implements RepositorioVendedor {
         List<Vendedor> vendedores = new ArrayList<>();
         String sql = "SELECT * FROM vendedores";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
+        try (Connection connection = conexionBase.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -39,7 +40,7 @@ public class ManejarVendedor implements RepositorioVendedor {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al obtener la lista de vendedores: " + e.getMessage());
         }
 
         return vendedores;
@@ -47,10 +48,16 @@ public class ManejarVendedor implements RepositorioVendedor {
 
     @Override
     public Vendedor obtenerVendedorPorCorreo(String correo) {
+        if (correo == null || correo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El correo no puede ser nulo o vacío");
+        }
+
         String sql = "SELECT * FROM vendedores WHERE correo = ?";
         Vendedor vendedor = null;
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection connection = conexionBase.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setString(1, correo);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -66,7 +73,7 @@ public class ManejarVendedor implements RepositorioVendedor {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al obtener el vendedor por correo: " + e.getMessage());
         }
 
         return vendedor;
@@ -74,14 +81,26 @@ public class ManejarVendedor implements RepositorioVendedor {
 
     @Override
     public void eliminarVendedor(String correo) {
+        if (correo == null || correo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El correo no puede ser nulo o vacío");
+        }
+
         String sql = "DELETE FROM vendedores WHERE correo = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection connection = conexionBase.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setString(1, correo);
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Vendedor eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró ningún vendedor con el correo: " + correo);
+            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al eliminar el vendedor: " + e.getMessage());
         }
     }
 }
