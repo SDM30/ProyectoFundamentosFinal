@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="207.0" layoutY="20.0" text="AGREGAR PRODUCTO">
+         <font>
+            <Font name="Sitka Text" size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="186.0" layoutY="91.0" prefHeight="25.0" prefWidth="228.0" />
+      <TextArea fx:id="DescripcionProducto" layoutX="186.0" layoutY="153.0" prefHeight="82.0" prefWidth="228.0" promptText="Escriba la descripcion del producto" />
+      <TextField layoutX="187.0" layoutY="274.0" prefHeight="25.0" prefWidth="228.0" promptText="COP" />
+      <Button fx:id="BotonCancelar" layoutX="34.0" layoutY="360.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="BotonGuardar" layoutX="509.0" layoutY="360.0" mnemonicParsing="false" text="Guardar" />
+      <Label fx:id="Nombre" layoutX="186.0" layoutY="66.0" text="Nombre del Producto" />
+      <Label fx:id="Descripcion" layoutX="186.0" layoutY="129.0" text="Descripcion" />
+      <Label layoutX="187.0" layoutY="248.0" text="Precio Unidad" />
+      <Label fx:id="Unidades" layoutX="192.0" layoutY="313.0" text="Unidades" />
+      <TextField fx:id="UnidadesProducto" layoutX="187.0" layoutY="335.0" prefHeight="25.0" prefWidth="228.0" promptText="Unidades iniciales del producto" />
+   </children>
+</Pane>

@@ -3,7 +3,6 @@ import javemarket.dominio.entidades.Vendedor;
 import java.util.List;
 
 public interface RepositorioVendedor {
-    void crearVendedor(Vendedor vendedor);
 
     List<Vendedor> obtenerVendedores();
 

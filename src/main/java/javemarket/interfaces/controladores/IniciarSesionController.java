@@ -1,6 +1,9 @@
 package javemarket.interfaces.controladores;
 
-import javemarket.dominio.entidades.IniciarSesion;
+import javemarket.aplicacion.servicios.IniciarSesion;
+import javemarket.aplicacion.servicios.UsuarioSesion;
+import javemarket.dominio.entidades.Comprador;
+import javemarket.dominio.entidades.Vendedor;
 import javemarket.interfaces.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class IniciarSesionController {
     @FXML private TextField correoField;
-    @FXML private PasswordField contras;
+    @FXML private PasswordField contrasField;
 
     private IniciarSesion inicioSesion;
 
@@ -20,21 +23,30 @@ public class IniciarSesionController {
 
     @FXML
     private void iniciarsesion(ActionEvent event) {
-
         String correo = correoField.getText();
-        String contrasena = contras.getText();
+        String contrasena = contrasField.getText();
 
-        if ( correo.isEmpty() || contrasena.isEmpty()) {
+        if (correo.isEmpty() || contrasena.isEmpty()) {
             showAlert("Campos vacíos", "Por favor, complete todos los campos.");
             return;
         }
 
+        // Verificar credenciales
         int inicio = inicioSesion.verificarcredenciales(correo, contrasena);
 
-        if (inicio==2 || inicio==3) {
-            SceneManager.changeScene("/vistas/pagina.fxml");
-        } else if (inicio==404) {
-            showAlert("Error", "El usuario no existe porfavor registrarse");
+        if (inicio == 2) { // Comprador
+            Comprador comprador = inicioSesion.obtenerCompradorPorCorreo(correo);
+            UsuarioSesion.getInstancia().setCompradorActual(comprador);
+            System.out.println("[DEBUG] Comprador autenticado: " + comprador.getNombre() + " (" + comprador.getCorreo() + ")");
+            SceneManager.changeScene("/vistas/menuComprador.fxml");
+        } else if (inicio == 3) { // Vendedor
+            Vendedor vendedor = inicioSesion.obtenerVendedorPorCorreo(correo);
+            UsuarioSesion.getInstancia().setVendedorActual(vendedor);
+            System.out.println("[DEBUG] Vendedor autenticado: " + vendedor.getNombre() + " (" + vendedor.getCorreo() + ")");
+            SceneManager.changeScene("/vistas/menuVendedor.fxml");
+        } else if (inicio == 404) { // Usuario no encontrado
+            showAlert("Error", "El usuario no existe. Por favor, regístrese.");
+            System.out.println("[DEBUG] Usuario no encontrado con correo: " + correo);
         }
     }
 
@@ -51,5 +63,3 @@ public class IniciarSesionController {
         SceneManager.changeScene("/vistas/hello-view.fxml");
     }
 }
-
-

@@ -1,5 +1,7 @@
-package javemarket.dominio.entidades;
+package javemarket.aplicacion.servicios;
 
+import javemarket.dominio.entidades.Comprador;
+import javemarket.dominio.entidades.Vendedor;
 import javemarket.infraestructura.persistencia.ConexionBase;
 
 import java.sql.PreparedStatement;
@@ -9,9 +11,14 @@ import java.util.regex.Pattern;
 
 public class IniciarSesion {
     private ConexionBase dbConnection;
+    private ManejarComprador manejarComprador;
+    private ManejarVendedor manejarVendedor;
+
 
     public IniciarSesion() {
         dbConnection = new ConexionBase();
+        this.manejarComprador = new ManejarComprador();
+        this.manejarVendedor = new ManejarVendedor();
     }
     public boolean validarCorreo(String email) {
         // Expresión regular para un correo electrónico que termine en @javeriana.edu.co
@@ -52,5 +59,13 @@ public class IniciarSesion {
         }
 
         return 404; // Credenciales no coinciden con ninguna tabla
+    }
+
+    public Comprador obtenerCompradorPorCorreo(String correo) {
+        return manejarComprador.obtenerCompradorPorCorreo(correo);
+    }
+
+    public Vendedor obtenerVendedorPorCorreo(String correo) {
+        return manejarVendedor.obtenerVendedorPorCorreo(correo);
     }
 }
