@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.menuCompradorController">
    <center>
-      <TableView prefHeight="253.0" prefWidth="695.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tablaProductos" prefHeight="253.0" prefWidth="695.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="nombreColumn" prefWidth="99.0" resizable="false" text="Nombre" />
           <TableColumn fx:id="descColumn" maxWidth="294.0" minWidth="-Infinity" prefWidth="194.0" resizable="false" text="Descripición del Producto" />
@@ -32,7 +32,7 @@
    <top>
       <HBox fillHeight="false" prefHeight="51.0" prefWidth="673.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="CarroComprasBtn" mnemonicParsing="false" text="Carro de Compras" textAlignment="CENTER">
+            <Button fx:id="carroComprasBtn" mnemonicParsing="false" onAction="#irCarritoCompra" text="Carro de Compras" textAlignment="CENTER">
                <HBox.margin>
                   <Insets bottom="10.0" left="20.0" top="20.0" />
                </HBox.margin>
@@ -58,7 +58,7 @@
                         <Insets top="20.0" />
                      </HBox.margin>
                   </Spinner>
-                  <Button fx:id="agregarBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="Agregar al Carrito">
+                  <Button fx:id="agregarBtn" mnemonicParsing="false" onAction="#agregarProductoAlCarrito" prefHeight="27.0" prefWidth="141.0" text="Agregar al Carrito">
                      <HBox.margin>
                         <Insets left="10.0" top="20.0" />
                      </HBox.margin>
@@ -89,7 +89,7 @@
                   </TextArea>
                </children>
             </HBox>
-            <Button fx:id="CerrarSesionBtn" mnemonicParsing="false" prefWidth="125.0" text="Cerrar Sesión">
+            <Button fx:id="cerrarSesionBtn" mnemonicParsing="false" onAction="#cerrarSesion" prefWidth="125.0" text="Cerrar Sesión">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" />
                </VBox.margin>

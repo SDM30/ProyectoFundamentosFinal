@@ -4,12 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.CarritoCompradorController">
    <children>
       <Label layoutX="249.0" layoutY="14.0" text="CARRITO DE COMPRAS" textAlignment="CENTER">
          <font>
@@ -18,28 +17,28 @@
       </Label>
       <HBox layoutX="42.0" layoutY="45.0" prefHeight="234.0" prefWidth="517.0">
          <children>
-            <TableView prefHeight="235.0" prefWidth="523.0">
+            <TableView fx:id="tablaProductos" prefHeight="235.0" prefWidth="523.0">
               <columns>
-                <TableColumn fx:id="ProductoCompra" prefWidth="161.0" text="Producto" />
-                <TableColumn fx:id="UnidadesCompra" prefWidth="102.0" text="Unidades" />
-                  <TableColumn fx:id="ValorUnidadCompra" prefWidth="135.0" text="Valor Unidad" />
-                  <TableColumn fx:id="TotalProductoCompra" prefWidth="120.0" text="Total" />
+                <TableColumn fx:id="productoColumn" prefWidth="161.0" text="Producto" />
+                <TableColumn fx:id="undColumn" prefWidth="102.0" text="Unidades" />
+                  <TableColumn fx:id="valorUnidadColumn" prefWidth="135.0" text="Valor Unidad" />
+                  <TableColumn fx:id="totalProductoColumn" prefWidth="120.0" text="Total" />
               </columns>
             </TableView>
          </children>
       </HBox>
       <HBox layoutX="211.0" layoutY="318.0" prefHeight="32.0" prefWidth="200.0">
          <children>
-            <HBox prefHeight="14.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefHeight="14.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="ValorTotal" editable="false" prefHeight="25.0" prefWidth="211.0" promptText="Valor Total" />
+                  <Label fx:id="totalPedidoLabel" prefHeight="19.0" prefWidth="205.0" />
                </children>
             </HBox>
          </children>
       </HBox>
       <Label fx:id="ValorTotalPedido" layoutX="258.0" layoutY="291.0" text="Valor Total Pedido" textAlignment="CENTER" />
-      <Button fx:id="VolverPedido" layoutX="232.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Volver" />
-      <Button fx:id="ConfirmarPedido" layoutX="325.0" layoutY="361.0" mnemonicParsing="false" text="Confirmar" />
-      <Button layoutX="50.0" layoutY="321.0" mnemonicParsing="false" text="Eliminar Producto" />
+      <Button fx:id="volverPedidoBtn" layoutX="232.0" layoutY="361.0" mnemonicParsing="false" onAction="#irMenuComprador" prefHeight="25.0" prefWidth="69.0" text="Volver" />
+      <Button fx:id="confirmarBtn" layoutX="325.0" layoutY="361.0" mnemonicParsing="false" onAction="#enviarPedido" text="Confirmar" />
+      <Button fx:id="elimBtn" layoutX="50.0" layoutY="321.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar Producto" />
    </children>
 </Pane>

@@ -118,4 +118,44 @@ public class ManejarPedido implements RepositorioPedido {
             e.printStackTrace();
         }
     }
+
+    public static List<String> obtenerNombresEdificios() {
+        List<String> nombresEdificios = new ArrayList<>();
+        String sql = "SELECT nombre FROM edificios";
+
+        try (Connection connection = new ConexionBase().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                nombresEdificios.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombresEdificios;
+    }
+
+    public int obtenerIdEdificioPorNombre(String nombreEdificio) {
+        int idEdificio = -1; // Valor predeterminado en caso de no encontrar el edificio
+        String sql = "SELECT id_edificio FROM edificios WHERE nombre = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, nombreEdificio); // Establecer el nombre del edificio
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    idEdificio = rs.getInt("id_edificio"); // Obtener el identificador
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idEdificio;
+    }
 }
