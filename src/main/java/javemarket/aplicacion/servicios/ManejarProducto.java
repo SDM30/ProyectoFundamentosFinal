@@ -1,4 +1,5 @@
 package javemarket.aplicacion.servicios;
+
 import javemarket.dominio.entidades.Producto;
 import javemarket.dominio.repositorios.RepositorioProducto;
 import javemarket.infraestructura.persistencia.ConexionBase;
@@ -17,12 +18,13 @@ public class ManejarProducto implements RepositorioProducto {
 
     @Override
     public void crearProducto(Producto producto) {
-        String sql = "INSERT INTO productos (nombre, descripcion, unidades, precio) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO productos (nombre, descripcion, unidades, precio, id_vendedor) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = dbConnection.getConnection().prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre());
             stmt.setString(2, producto.getDescripcion());
             stmt.setInt(3, producto.getUnidades());
             stmt.setDouble(4, producto.getPrecio());
+            stmt.setInt(5, producto.getIdVendedor()); // Nuevo campo id_vendedor
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,6 +45,7 @@ public class ManejarProducto implements RepositorioProducto {
                         rs.getDouble("precio")
                 );
                 producto.setIdProducto(rs.getInt("id_producto"));
+                producto.setIdVendedor(rs.getInt("id_vendedor")); // Asignar id_vendedor
                 productos.add(producto);
             }
         } catch (SQLException e) {
@@ -66,6 +69,7 @@ public class ManejarProducto implements RepositorioProducto {
                             rs.getDouble("precio")
                     );
                     producto.setIdProducto(rs.getInt("id_producto"));
+                    producto.setIdVendedor(rs.getInt("id_vendedor")); // Asignar id_vendedor
                 }
             }
         } catch (SQLException e) {
@@ -76,13 +80,14 @@ public class ManejarProducto implements RepositorioProducto {
 
     @Override
     public void actualizarProducto(Producto producto) {
-        String sql = "UPDATE productos SET nombre = ?, descripcion = ?, unidades = ?, precio = ? WHERE id_producto = ?";
+        String sql = "UPDATE productos SET nombre = ?, descripcion = ?, unidades = ?, precio = ?, id_vendedor = ? WHERE id_producto = ?";
         try (PreparedStatement stmt = dbConnection.getConnection().prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre());
             stmt.setString(2, producto.getDescripcion());
             stmt.setInt(3, producto.getUnidades());
             stmt.setDouble(4, producto.getPrecio());
-            stmt.setInt(5, producto.getIdProducto());
+            stmt.setInt(5, producto.getIdVendedor()); // Actualizar id_vendedor
+            stmt.setInt(6, producto.getIdProducto());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

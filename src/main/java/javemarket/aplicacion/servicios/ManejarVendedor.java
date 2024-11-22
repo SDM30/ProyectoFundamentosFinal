@@ -103,4 +103,30 @@ public class ManejarVendedor implements RepositorioVendedor {
             System.err.println("Error al eliminar el vendedor: " + e.getMessage());
         }
     }
+
+    public int obtenerIdVendedorPorCorreo(String correo) {
+        if (correo == null || correo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El correo no puede ser nulo o vacío");
+        }
+
+        String sql = "SELECT id FROM vendedores WHERE correo = ?";
+        int idVendedor = -1; // Valor predeterminado en caso de no encontrar el vendedor
+
+        try (Connection connection = conexionBase.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, correo);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    idVendedor = rs.getInt("id");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener el ID del vendedor por correo: " + e.getMessage());
+        }
+
+        return idVendedor;
+    }
 }

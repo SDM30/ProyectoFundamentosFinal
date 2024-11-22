@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.menuVendedorController">
     <children>
         <HBox layoutX="7.0" layoutY="50.0" prefHeight="310.0" prefWidth="585.0">
             <children>
-                <TableView prefHeight="310.0" prefWidth="585.0">
+                <TableView fx:id="tablaPedidos" prefHeight="310.0" prefWidth="585.0">
                     <columns>
-                        <TableColumn fx:id="IdPedido" prefWidth="75.0" text="Id Pedido" />
-                        <TableColumn fx:id="FechaPedido" prefWidth="77.0" text="Fecha" />
-                        <TableColumn fx:id="ClientePedido" prefWidth="131.0" text="Cliente" />
-                        <TableColumn fx:id="TotalPedido" prefWidth="83.0" text="Total" />
-                        <TableColumn fx:id="ComentarioPedido" prefWidth="136.0" text="Comentario" />
-                        <TableColumn fx:id="EdificioPedido" prefWidth="85.0" text="Edificio" />
+                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id Pedido" />
+                        <TableColumn fx:id="fechaColumn" prefWidth="77.0" text="Fecha" />
+                        <TableColumn fx:id="clienteColumn" prefWidth="131.0" text="Cliente" />
+                        <TableColumn fx:id="totalColumn" prefWidth="83.0" text="Total" />
+                        <TableColumn fx:id="comentarioColumn" prefWidth="136.0" text="Comentario" />
+                        <TableColumn fx:id="edificioColumn" prefWidth="85.0" text="Edificio" />
                     </columns>
                 </TableView>
             </children>
@@ -30,7 +30,7 @@
             </font>
         </Label>
         <Button fx:id="BotonAceptarTabla" layoutX="271.0" layoutY="366.0" mnemonicParsing="false" text="Aceptar" />
-        <Button fx:id="CerrarSesion" layoutX="27.0" layoutY="366.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text=" Cerrar Sesion" />
-        <Button fx:id="agregarProducto" layoutX="461.0" layoutY="366.0" mnemonicParsing="false" text="Agregar Producto" />
+        <Button fx:id="CerrarSesion" layoutX="27.0" layoutY="366.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="25.0" prefWidth="110.0" text=" Cerrar Sesion" />
+        <Button fx:id="agregarProducto" layoutX="461.0" layoutY="366.0" mnemonicParsing="false" onAction="#irAgregarProducto" text="Agregar Producto" />
     </children>
 </Pane>

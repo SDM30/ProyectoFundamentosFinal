@@ -7,6 +7,9 @@ public class Producto {
     private int unidades;
     private double precio;
 
+
+    private int IdVendedor;
+
     // Constructor vacío
     public Producto() {
     }
@@ -68,5 +71,13 @@ public class Producto {
                 ", unidades=" + unidades +
                 ", precio=" + precio +
                 '}';
+    }
+
+    public int getIdVendedor() {
+        return this.IdVendedor;
+    }
+
+    public void setIdVendedor(int idVendedor) {
+        IdVendedor = idVendedor;
     }
 }
