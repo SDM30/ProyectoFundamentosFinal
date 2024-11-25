@@ -8,7 +8,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import java.io.IOException;
 
 public class CorreoService implements javemarket.aplicacion.servicios.CorreoService {
-    private final String apiKey = "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"; // Variable de entorno para la API Key de SendGrid
+    private final String llaveSendGrid = "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"; // Variable de entorno para la API Key de SendGrid
     private final String remitente = "simondiazmonroy@gmail.com";
 
     @Override
@@ -20,7 +20,7 @@ public class CorreoService implements javemarket.aplicacion.servicios.CorreoServ
         Mail mail = new Mail(from, asunto, to, emailContent);
 
         // Configurar SendGrid API
-        SendGrid sg = new SendGrid(apiKey);
+        SendGrid sg = new SendGrid(llaveSendGrid);
         Request request = new Request();
 
         try {
