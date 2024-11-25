@@ -11,10 +11,13 @@ import javemarket.dominio.entidades.Pedido;
 import javemarket.dominio.entidades.Producto;
 import javemarket.interfaces.SceneManager;
 import javemarket.interfaces.controladores.menuCompradorController;
+import javemarket.interfaces.controladores.CorreoService;
 
 import java.util.Map;
 
 public class CarritoCompradorController {
+
+    private final CorreoService correoService;
 
     // Tabla de productos
     @FXML
@@ -29,6 +32,10 @@ public class CarritoCompradorController {
     private TableColumn<Producto, Double> totalProductoColumn;
     @FXML
     private Label totalPedidoLabel;
+
+    public CarritoCompradorController(CorreoService correoService) {
+        this.correoService = correoService;
+    }
 
     @FXML
     public void initialize() {
@@ -115,6 +122,16 @@ public class CarritoCompradorController {
         ManejarPedido manejarPedido = new ManejarPedido();
         manejarPedido.crearPedido(pedidoCliente);
 
+        // Notificar al cliente por correo
+        String email = pedidoCliente.getCliente(); // Obtén el correo del cliente
+        String asunto = "Tu pedido está listo";
+        String mensaje = "Hola " + pedidoCliente.getCliente()+ ",\n\n"
+                + "Tu pedido ha sido enviado exitosamente.\n"
+                + "Total del pedido: $" + String.format("%.2f", pedidoCliente.getTotal()) + "\n\n"
+                + "¡Gracias por comprar con nosotros!";
+
+        notificar(email, asunto, mensaje);
+
         mostrarAlerta("Pedido enviado", "Tu pedido ha sido enviado exitosamente.");
 
         // Limpiar el carrito y recargar la tabla
@@ -138,4 +155,14 @@ public class CarritoCompradorController {
         double total = menuCompradorController.getCarroCompras().getTotal();
         totalPedidoLabel.setText(String.format("Total: $%.2f", total));
     }
+    private void notificar(String email, String asunto, String mensaje) {
+        try {
+            correoService.enviarCorreo(email, asunto, mensaje);
+            mostrarAlerta("Correo enviado", "Se ha enviado una notificación al cliente.");
+        } catch (Exception e) {
+            mostrarAlerta("Error al enviar correo", "No se pudo enviar el correo. Por favor, intenta nuevamente.");
+            e.printStackTrace();
+        }
+    }
+
 }
