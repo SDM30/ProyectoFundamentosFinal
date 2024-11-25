@@ -1,41 +1,43 @@
 package javemarket.interfaces.controladores;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.Properties;
+import com.sendgrid.*;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+
+import java.io.IOException;
 
 public class CorreoService implements javemarket.aplicacion.servicios.CorreoService {
-    private final String remitente = System.getenv("MAIL_SENDER"); // Variable de entorno para el remitente
-    private final String smtpHost = System.getenv("SMTP_HOST"); // Variable de entorno para el servidor SMTP
-    private final String smtpPort = System.getenv("SMTP_PORT"); // Variable de entorno para el puerto SMTP
+    private final String apiKey = "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"; // Variable de entorno para la API Key de SendGrid
+    private final String remitente = "simondiazmonroy@gmail.com";
 
     @Override
-    public void enviarCorreo(String destinatario, String asunto, String contenido) throws MessagingException {
-        // Configurar propiedades del servidor de correo
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "false"); // No requiere autenticación
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", smtpHost); // Servidor configurado desde variable de entorno
-        props.put("mail.smtp.port", smtpPort); // Puerto configurado desde variable de entorno
+    public void enviarCorreo(String destinatario, String asunto, String contenido) {
+        // Configurar remitente, destinatario y contenido del correo
+        Email from = new Email(remitente);  // Dirección de correo remitente
+        Email to = new Email(destinatario); // Dirección de correo destinatario
+        Content emailContent = new Content("text/plain", contenido); // Contenido del correo
+        Mail mail = new Mail(from, asunto, to, emailContent);
 
-        // Crear sesión sin autenticación
-        Session session = Session.getInstance(props);
+        // Configurar SendGrid API
+        SendGrid sg = new SendGrid(apiKey);
+        Request request = new Request();
 
         try {
-            // Crear mensaje de correo
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(remitente)); // Dirección del remitente
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario)); // Destinatario
-            message.setSubject(asunto); // Asunto del correo
-            message.setText(contenido); // Mensaje
+            // Configurar la solicitud para enviar el correo
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
 
-            // Enviar correo
-            Transport.send(message);
-            System.out.println("Correo enviado exitosamente a " + destinatario);
+            // Enviar el correo y obtener la respuesta
+            Response response = sg.api(request);
+            System.out.println("Estado: " + response.getStatusCode());
+            System.out.println("Cuerpo de respuesta: " + response.getBody());
+            System.out.println("Encabezados: " + response.getHeaders());
 
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error al enviar el correo", e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("Error al enviar el correo", ex);
         }
     }
 }
