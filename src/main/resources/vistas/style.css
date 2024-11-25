@@ -1,0 +1,24 @@
+/* Aplica la fuente "Sitka Text" a todos los nodos */
+* {
+    -fx-font-family: "Sitka Text";
+}
+
+/* Personalización para los botones */
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: #007BFF;
+    -fx-background-radius: 5;
+}
+
+
+.label {
+    -fx-text-fill: black;
+}
+
+/* Personalización para encabezados de tabla */
+.table-column-header {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}

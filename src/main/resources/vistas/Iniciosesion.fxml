@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.IniciarSesionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styleHello-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.IniciarSesionController">
    <top>
-      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" stylesheets="@styleHello-view.css" BorderPane.alignment="CENTER">
          <children>
             <HBox>
                <children>
@@ -50,13 +50,16 @@
 
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Correo Institucional">
                <font>
-                  <Font name="Sitka Text" size="13.0" />
+                  <Font name="Sitka Text" size="15.0" />
                </font>
             </Text>
             <TextField fx:id="correoField" promptText="ejemplo@javeriana.edu.co" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" />
 
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
             <PasswordField fx:id="contrasField" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" />

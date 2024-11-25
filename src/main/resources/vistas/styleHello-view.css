@@ -1,0 +1,13 @@
+/* Aplica la fuente "Sitka Text" a todos los nodos */
+* {
+    -fx-font-family: "Sitka Text";
+}
+
+/* Personalización para los botones */
+.button {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-color: #007BFF;
+    -fx-background-radius: 5;
+}
+

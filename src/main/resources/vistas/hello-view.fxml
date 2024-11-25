@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="420.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.MainController">
+<Pane prefHeight="420.0" prefWidth="628.0" stylesheets="@styleHello-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.MainController">
    <children>
       <Label layoutX="259.0" layoutY="43.0" text="Bienvenido a">
          <font>
@@ -17,15 +17,15 @@
             <Font name="Sitka Text" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="263.0" layoutY="193.0" onAction="#showRegistrarDueno" text="Registrar Dueño" />
-      <Button layoutX="250.0" layoutY="233.0" onAction="#showRegistrarComprador" text="Registrar Comprador" />
-      <Button layoutX="254.0" layoutY="275.0" onAction="#showRegistrarVendedor" text="Registrar Vendedor" />
+      <Button layoutX="213.0" layoutY="196.0" onAction="#showRegistrarDueno" prefWidth="200.0" text="Registrar Dueño" />
+      <Button layoutX="213.0" layoutY="233.0" onAction="#showRegistrarComprador" prefWidth="200.0" text="Registrar Comprador" />
+      <Button layoutX="213.0" layoutY="270.0" onAction="#showRegistrarVendedor" prefWidth="200.0" text="Registrar Vendedor" />
       <Label layoutX="137.0" layoutY="136.0" text="porfavor seleccione su metodo de registro">
          <font>
             <Font name="Sitka Text" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="250.0" layoutY="315.0" mnemonicParsing="false" onAction="#showRegistrarModerador" text="Registrar Moderador" />
-      <Button layoutX="271.0" layoutY="357.0" mnemonicParsing="false" onAction="#showInicioSesion" text="Iniciar Sesion" />
+      <Button layoutX="214.0" layoutY="308.0" mnemonicParsing="false" onAction="#showRegistrarModerador" prefWidth="200.0" text="Registrar Moderador" />
+      <Button layoutX="213.0" layoutY="346.0" mnemonicParsing="false" onAction="#showInicioSesion" prefWidth="200.0" text="Iniciar Sesion" />
    </children>
 </Pane>

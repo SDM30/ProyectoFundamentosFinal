@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.AgregarProductoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.AgregarProductoController">
    <children>
-      <Label layoutX="207.0" layoutY="20.0" text="AGREGAR PRODUCTO">
+      <Label layoutX="177.0" layoutY="14.0" prefHeight="17.0" stylesheets="@style.css" text="AGREGAR PRODUCTO">
          <font>
-            <Font name="Sitka Text" size="18.0" />
+            <Font name="Sitka Text" size="24.0" />
          </font>
       </Label>
       <TextField fx:id="nombreField" layoutX="186.0" layoutY="91.0" prefHeight="25.0" prefWidth="228.0" />
       <TextArea fx:id="descField" layoutX="186.0" layoutY="153.0" prefHeight="82.0" prefWidth="228.0" promptText="Escriba la descripcion del producto" />
       <TextField fx:id="precioField" layoutX="187.0" layoutY="274.0" prefHeight="25.0" prefWidth="228.0" promptText="COP" />
-      <Button fx:id="BotonCancelar" layoutX="34.0" layoutY="360.0" mnemonicParsing="false" onAction="#irMenuVendedor" text="Cancelar" />
+      <Button fx:id="BotonCancelar" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#irMenuVendedor" text="Cancelar" />
       <Button fx:id="BotonGuardar" layoutX="509.0" layoutY="360.0" mnemonicParsing="false" onAction="#guardarProducto" text="Guardar" />
       <Label fx:id="Nombre" layoutX="186.0" layoutY="66.0" text="Nombre del Producto" />
       <Label fx:id="Descripcion" layoutX="186.0" layoutY="129.0" text="Descripcion" />

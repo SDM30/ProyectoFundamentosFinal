@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.DuenoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javemarket.interfaces.controladores.DuenoController">
    <top>
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -31,11 +31,13 @@
                   </Text>
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro Dueño" textAlignment="CENTER">
                <font>
                   <Font name="Sitka Text" size="15.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="60.0" />
+               </VBox.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
