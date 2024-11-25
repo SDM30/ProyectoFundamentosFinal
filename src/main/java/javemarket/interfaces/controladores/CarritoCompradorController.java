@@ -17,8 +17,6 @@ import java.util.Map;
 
 public class CarritoCompradorController {
 
-    private final CorreoService correoService;
-
     // Tabla de productos
     @FXML
     private TableView<Producto> tablaProductos;
@@ -33,9 +31,6 @@ public class CarritoCompradorController {
     @FXML
     private Label totalPedidoLabel;
 
-    public CarritoCompradorController(CorreoService correoService) {
-        this.correoService = correoService;
-    }
 
     @FXML
     public void initialize() {
@@ -102,7 +97,8 @@ public class CarritoCompradorController {
 
     @FXML
     private void enviarPedido() {
-        // Obtener el pedido y el carrito compartidos
+
+        CorreoService correoService = new CorreoService();
         Pedido pedidoCliente = menuCompradorController.getPedidoCliente();
         Carrito carritoCompras = menuCompradorController.getCarroCompras();
 
@@ -130,7 +126,7 @@ public class CarritoCompradorController {
                 + "Total del pedido: $" + String.format("%.2f", pedidoCliente.getTotal()) + "\n\n"
                 + "¡Gracias por comprar con nosotros!";
 
-        notificar(email, asunto, mensaje);
+        notificar(correoService, email, asunto, mensaje);
 
         mostrarAlerta("Pedido enviado", "Tu pedido ha sido enviado exitosamente.");
 
@@ -155,7 +151,7 @@ public class CarritoCompradorController {
         double total = menuCompradorController.getCarroCompras().getTotal();
         totalPedidoLabel.setText(String.format("Total: $%.2f", total));
     }
-    private void notificar(String email, String asunto, String mensaje) {
+    private void notificar(CorreoService correoService,String email, String asunto, String mensaje) {
         try {
             correoService.enviarCorreo(email, asunto, mensaje);
             mostrarAlerta("Correo enviado", "Se ha enviado una notificación al cliente.");
